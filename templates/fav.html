@@ -90,8 +90,6 @@
         </div>
     </div>
 </nav>
-
-
 <section class="portfolio ">
     <div class="container">
         <!--정렬 라벨-->
@@ -114,117 +112,129 @@
             <div class="all_del">
                 <button type="button" name="shuffle-filter" class="btn-black"/>
                 전체 삭제
-			</div>
-		</div>
+            </div>
+        </div>
 
 
-		<!--즐겨찾기 한 메뉴 출력-->
-		<h4 name="shuffle-filter">카페,메뉴별</h4>
-		<div class="row shuffle-wrapper portfolio-gallery">
-	      <div class="col-lg-4 col-6 mb-4 shuffle-item"  data-groups="[&quot;design&quot;,&quot;illustration&quot;]">
-		      	<div class="position-relative inner-box">
-		          <div class="image position-relative ">
-	               <img src="/static/theme/images/portfolio/1.jpg" alt="portfolio-image" class="img-fluid w-100 d-block">
-	                <div class="overlay-box">
-						<button class="close_btn"></button>
-	                  <div class="overlay-inner">
-	                    <a class="overlay-content">
-	                      <h5 class="mb-0">Painting</h5>
-	                      <p>Design</p>
-	                    </a>
-	                  </div>
-	                </div>
-	            </div>
-		      </div>
-	      </div>
+        <!--즐겨찾기 한 메뉴 출력-->
+        <div id="category">
+            <h4 name="shuffle-filter">카페,메뉴별</h4>
+            <div class="row shuffle-wrapper portfolio-gallery" id="menu_out">
+                <div class="col-lg-4 col-6 mb-4 shuffle-item"
+                     data-groups="[&quot;design&quot;,&quot;illustration&quot;]">
+                    <div class="position-relative inner-box">
+                        <div class="image position-relative ">
+                            <img src="/static/theme/images/portfolio/1.jpg" alt="portfolio-image"
+                                 class="img-fluid w-100 d-block">
+                            <div class="overlay-box">
+                                <button class="close_btn"></button>
+                                <div class="overlay-inner">
+                                    <a class="overlay-content">
+                                        <h5 class="mb-0">카페이름</h5>
+                                        <p>메뉴이름</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-	      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;branding&quot;]">
-	        <div class="position-relative inner-box" >
-	            <div class="image position-relative ">
-	               <img src="/static/theme/images/portfolio/4.jpg" alt="portfolio-image" class="img-fluid w-100 d-block">
-	                <div class="overlay-box">
-						<button class="close_btn"></button>
-	                  <div class="overlay-inner">
-		                    <a class="overlay-content" href="portfolio-single.html">
-		                      <h5 class="mb-0">Web app</h5>
-		                      <p>Development</p>
-		                    </a>
-	                	</div>
-		            </div>
-		        </div>
-		      </div>
-	      </div>
+                <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;branding&quot;]">
+                    <div class="position-relative inner-box">
+                        <div class="image position-relative ">
+                            <img src="/static/theme/images/portfolio/4.jpg" alt="portfolio-image"
+                                 class="img-fluid w-100 d-block">
+                            <div class="overlay-box">
+                                <button class="close_btn"></button>
+                                <div class="overlay-inner">
+                                    <a class="overlay-content" href="portfolio-single.html">
+                                        <h5 class="mb-0">카페이름</h5>
+                                        <p>메뉴이름</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-	      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;illustration&quot;]">
-	        <div class="position-relative inner-box">
-	            <div class="image position-relative ">
-	               <img src="/static/theme/images/portfolio/3.jpg" alt="portfolio-image" class="img-fluid w-100 d-block">
-	                <div class="overlay-box">
-						<button class="close_btn"></button>
-	                  <div class="overlay-inner">
-	                    <a class="overlay-content" href="portfolio-single.html">
-	                      <h5 class="mb-0">Business </h5>
-	                      <p>marketing</p>
-	                    </a>
-	                  </div>
-	                </div>
-	            </div>
-	        </div>
-	      </div>
 
-	      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;design&quot;,&quot;branding&quot;]">
-	        <div class="position-relative inner-box">
-	            <div class="image position-relative ">
-	               <img src="/static/theme/images/portfolio/5.jpg" alt="portfolio-image" class="img-fluid w-100 d-block">
-	                <div class="overlay-box">
-						<button class="close_btn"></button>
-	                  <div class="overlay-inner">
-	                    <a class="overlay-content" href="portfolio-single.html">
-	                      <h5 class="mb-0">Portfolio</h5>
-	                      <p>Design</p>
-	                    </a>
-	                  </div>
-	                </div>
-	            </div>
-	        </div>
-	      </div>
+                <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;design&quot;,&quot;branding&quot;]">
+                    <div class="position-relative inner-box">
+                        <div class="image position-relative ">
+                            <img src="/static/theme/images/portfolio/5.jpg" alt="portfolio-image"
+                                 class="img-fluid w-100 d-block">
+                            <div class="overlay-box">
+                                <button class="close_btn"></button>
+                                <div class="overlay-inner">
+                                    <a class="overlay-content" href="portfolio-single.html">
+                                        <h5 class="mb-0">카페이름</h5>
+                                        <p>메뉴이름</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-	      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;illustration&quot;]">
-	        <div class="position-relative inner-box">
-	            <div class="image position-relative ">
-	               <img src="/static/theme/images/portfolio/6.jpg" alt="portfolio-image" class="img-fluid w-100 d-block">
-	                <div class="overlay-box">
-						<button class="close_btn"></button>
-	                  <div class="overlay-inner">
-	                    <a class="overlay-content" href="portfolio-single.html">
-	                       <h5 class="mb-0 ">Modern web</h5>
-	                      	<p>Seo</p>
-	                    </a>
-	                  </div>
-	                </div>
-	            </div>
-	        </div>
-	      </div>
+                <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;illustration&quot;]">
+                    <div class="position-relative inner-box">
+                        <div class="image position-relative ">
+                            <img src="/static/theme/images/portfolio/6.jpg" alt="portfolio-image"
+                                 class="img-fluid w-100 d-block">
+                            <div class="overlay-box">
+                                <button class="close_btn"></button>
+                                <div class="overlay-inner">
+                                    <a class="overlay-content" href="portfolio-single.html">
+                                        <h5 class="mb-0 ">카페이름</h5>
+                                        <p>메뉴이름</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-	      <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;design&quot;,&quot;photo&quot;]">
-	        <div class="position-relative inner-box">
-	            <div class="image position-relative ">
-	               <img src="/static/theme/images/portfolio/7.jpg" alt="portfolio-image" class="img-fluid w-100 d-block">
-	                <div class="overlay-box">
-						<button class="close_btn"></button>
-	                  <div class="overlay-inner">
-	                    <a class="overlay-content" href="portfolio-single.html">
-	                       <h5 class="mb-0">Agency web</h5>
-	                      	<p>Design</p>
-	                    </a>
-	                  </div>
-	                </div>
-	            </div>
-	        </div>
-	      </div>
-	    </div>
+                <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;design&quot;,&quot;photo&quot;]">
+                    <div class="position-relative inner-box">
+                        <div class="image position-relative ">
+                            <img src="/static/theme/images/portfolio/7.jpg" alt="portfolio-image"
+                                 class="img-fluid w-100 d-block">
+                            <div class="overlay-box">
+                                <button class="close_btn"></button>
+                                <div class="overlay-inner">
+                                    <a class="overlay-content" href="portfolio-single.html">
+                                        <h5 class="mb-0">카페이름</h5>
+                                        <p>메뉴이름</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-6 mb-4 shuffle-item" data-groups="[&quot;illustration&quot;]">
+                    <div class="position-relative inner-box">
+                        <div class="image position-relative ">
+                            <img src="/static/theme/images/portfolio/3.jpg" alt="portfolio-image"
+                                 class="img-fluid w-100 d-block">
+                            <div class="overlay-box">
+                                <button class="close_btn"></button>
+                                <div class="overlay-inner">
+                                    <a class="overlay-content" href="portfolio-single.html">
+                                        <h5 class="mb-0">카페이름 </h5>
+                                        <p>메뉴이름</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+
 
 </body>
 </html>
