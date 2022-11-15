@@ -48,14 +48,13 @@
             position: relative;
             width: 360px;
             height: 360px;
-            background-image: url('https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002081]_20210415133656839.jpg');
-            background-position: center;
-            background-size: cover;
             /*background-color: #0b0b0b;*/
             float: left;
         }
-        .favorite-btn{
+        .favorite-btn {
             position: absolute;
+            width: 40px;
+            height: 40px;
             top: 0;
             left: 0;
             margin: 10px;
@@ -100,6 +99,11 @@
         }
 
     </style>
+    <!-- Main Script -->
+    <script src="/static/theme/js/script.js">
+
+    </script>
+
 </head>
 
 <body>
@@ -155,70 +159,33 @@
     </div>
 </nav>
 <!-- 메인 컨테이너 -->
-<div class="main_container">
-    <div class="myimage">
-        <div class="favorite-container">
-            <button class="favorite-btn">즐겨찾기 추가</button>
-        </div>
-    </div>
+<div class="main_container" id="main">
+
 <!--  ingredient  -->
-    <div class="ingredient-container">
-        <h2>민트 콜드 브루</h2>
-        <div class="divider"></div>
-        <div class="coffee-desc">
-        Mint Cold Brew 상쾌한 민트향 시럽과 잘게 갈린 얼음이 어우러져 시원함이 강렬하게 느껴지는 리저브만의 콜드 브루 음료
-        </div>
-        <ul class="ingredient-list">
-            <li>caffeine</li>
-            <li>calorie</li>
-            <li>protein</li>
-            <li>salt</li>
-            <li>saturated_fat</li>
-            <li>sugars</li>
-        </ul>
-    </div>
+
 </div>
 <div class="comment-textarea-container">
-    <h5>댓글남기기</h5>
-    <div class="comment-input">
-        <textarea aria-label="text-input" class="comment-textarea" placeholder="Leave a comment here" id="comment" >
-        </textarea>
+    <div>
+        <h5>댓글남기기</h5>
+        <div class="comment-input">
+            <textarea id="comment-field" aria-label="text-input" class="comment-textarea" placeholder="Leave a comment here" id="comment" >
+            </textarea>
+        </div>
+        <button onclick="save_coffee_comment()" type="button" class="btn btn-dark">
+            등록
+        </button>
     </div>
-    <button onclick="save_comment()" type="button" class="btn btn-dark">
-        등록
-    </button>
 </div>
-
-<div class="comments-container">
-    <div class="comment">
-        <div class="comment-header">
-            <p>ID</p>
-        </div>
-        <div class="card-content">
-            <blockquote class="blockquote mb-0">
-                <p>A well-known quote, contained in a blockquote element.</p>
-            </blockquote>
-        </div>
-        <div class="divider"></div>
-    </div>
-    <div class="comment">
-        <div class="comment-header">
-            <p>ID</p>
-        </div>
-        <div class="card-content">
-            <blockquote class="blockquote mb-0">
-                <p>A well-known quote, contained in a blockquote element.</p>
-            </blockquote>
-        </div>
-        <div class="divider"></div>
-    </div>
+<div class="comments-container" id="comments">
 </div>
 
 
 </body>
 
 <!-- jQuery -->
-<script src="/static/theme/plugins/jQuery/jquery.min.js"></script>
+<script src="/static/theme/plugins/jQuery/jquery.min.js">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</script>
 <!-- Bootstrap JS -->
 <script src="/static/theme/plugins/bootstrap/bootstrap.min.js"></script>
 <script src="/static/theme/plugins/aos/aos.js"></script>
@@ -229,7 +196,103 @@
 <script src="/static/theme/plugins/counto/apear.js"></script>
 <script src="/static/theme/plugins/counto/counTo.js"></script>
 
-<!-- Main Script -->
-<script src="/static/theme/js/script.js"></script>
+<script>
+     $(document).ready(function () {
+                get_coffee_detail();
+                get_comment()
+            });
+            function get_comment() {
+                $.ajax({
+                    type: "GET",
+                    url: `/comment`,
+                    data: {},
+                    success: function (response) {
+                        let rows = response['comment']
+                        for(let i =0; i<rows.length; i++){
+
+                            let id = rows[i]['id']
+                            let comment = rows[i]['comment']
+                            console.log(id)
+                            console.log(comment)
+                            let comment_html = `<div class="comment">
+                                                    <div class="comment-header">
+                                                        <p>ID : ${id}</p>
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>${comment}</p>
+                                                        </blockquote>
+                                                    </div>
+                                                    <div class="divider"></div>
+                                                </div>`
+                            $('#comments').append(comment_html)
+                        }
+                    }
+                })
+            }
+            function get_coffee_detail(){
+                let coffee_id = 1
+                $.ajax({
+                    type: "GET",
+                    url: `/coffee`,
+                    data: {},
+                    success: function (response) {
+                        console.log(response)
+                        let rows = response['detail']
+                        console.log(rows[0])
+                        let caffeine = rows[0]["caffeine"]
+                        let calorie = rows[0]["calorie"]
+                        let coffee_desc = rows[0]["coffee_desc"]
+                        let coffee_image= rows[0]["coffee_image"]
+                        let coffee_name = rows[0]["coffee_name"]
+                        let protein = rows[0]["protein"]
+                        let salt = rows[0]["salt"]
+                        let saturated_fat = rows[0]["saturated_fat"]
+                        let sugars =rows[0]["sugars"]
+
+                        let detail_ing =`<img className = "myimage" src =${coffee_image} alt =${coffee_name}>
+                                                <div className = "favorite-container" onclick="favoriteOnClick()">
+                                                    <img className = "favorite-btn" style="height: 50px" src="https://cdn0.iconfinder.com/data/icons/shop_icons/256/star.png" alt="Bookmark icon></img>
+                                                </div>
+                                            </img>
+                                            <div class="ingredient-container" id="ingredient">
+                                                <h2>${coffee_name}</h2>
+                                                <div class="divider"></div>
+                                                <div class="coffee-desc">
+                                                ${coffee_desc}
+                                                </div>
+                                                <ul class="ingredient-list">
+                                                    <li>caffeine : ${caffeine} </li>
+                                                    <li>calorie : ${calorie}</li>
+                                                    <li>protein : ${protein}</li>
+                                                    <li>salt : ${salt}</li>
+                                                    <li>saturated_fat : ${saturated_fat}</li>
+                                                    <li>sugars : ${sugars}</li>
+                                                </ul>
+                                            </div>`
+
+                        $('#main').append(detail_ing)
+                    }
+                })
+            }
+            function save_coffee_comment(){
+                let comment = $('#comment-field').val()
+                let id = 999
+                console.log(comment)
+                $.ajax({
+                    type: 'POST',
+                    url: '/comment',
+                    data: {comment_give: comment, id_give: id},
+                    success: function (response) {
+                        alert('댓글 등록 완료')
+                        window.location.reload()
+                    }
+                })
+            }
+            function favoriteOnClick(){
+                console.log('즐겨찾기')
+            }
+</script>
+
 
 </html>
