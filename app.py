@@ -32,5 +32,13 @@ import hashlib
 def home():
     return render_template('index.html')
 
+@app.route("/users", methods=["GET"])
+def fave_get():
+    fav_num = list(db.users.find({'name':~}, {'_id': False}))
+    fav_menu = list(db.coffee.find({fav_num:coffe_id},{'_id':False}))
+    return jsonify({'coffees':fav_menu})
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
+
+
