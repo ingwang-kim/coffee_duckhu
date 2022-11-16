@@ -26,9 +26,9 @@ import datetime
 import hashlib
 
 # 커피상세정보 GET
-@app.route('/coffee', methods=["GET"])
+@app.route('/coffee/1', methods=["GET"])
 def get_coffee_detail():
-    coffee_detail = list(db.coffee.find({'coffee_id':1}, {'_id': False}))
+    coffee_detail = list(db.coffee.find({'coffee_id': 1}, {'_id': False}))
     print(coffee_detail)
     return jsonify({'detail': coffee_detail})
 

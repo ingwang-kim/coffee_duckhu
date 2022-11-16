@@ -198,8 +198,9 @@
 
 <script>
      $(document).ready(function () {
-                get_coffee_detail();
+
                 get_comment()
+         get_coffee_detail();
             });
             function get_comment() {
                 $.ajax({
@@ -234,7 +235,7 @@
                 let coffee_id = 1
                 $.ajax({
                     type: "GET",
-                    url: `/coffee`,
+                    url: `/coffee/1`,
                     data: {},
                     success: function (response) {
                         console.log(response)
