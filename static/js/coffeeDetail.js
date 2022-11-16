@@ -78,6 +78,7 @@
                                                     </div>
                                                     <div class="divider"></div>
                                                 </div>`
+
                      $('#comments').append(comment_html)
                  }
              }
@@ -89,6 +90,7 @@
          let nickname = document.getElementById('nickname').value;
          let uid =document.getElementById('uid').value;
          let comment = $('#comment-field').val()
+
 
          if(!nickname){
             nickname = '비회원'

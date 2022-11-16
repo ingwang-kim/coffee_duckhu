@@ -44,9 +44,7 @@ def home():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         print(payload)
         user_info = db.user.find_one({"id": payload['id']})
-
-        print(result)
-        return render_template('index.html', variable=result, nickname=user_info["nick"])
+        return render_template('index.html', variable=result, nickname=user_info["nick"], uid=user_info["uid"])
     except jwt.ExpiredSignatureError:
 
         return render_template('index.html', variable=result)
@@ -55,37 +53,39 @@ def home():
 
 @app.route('/login')
 def login():
-    msg = request.args.get("msg")
-    return render_template('login.html', msg=msg)
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        return render_template('fav.html', nickname=user_info["nick"], uid=user_info["uid"])
+    except jwt.ExpiredSignatureError:
+        return render_template('login.html')
+    except jwt.exceptions.DecodeError:
+        return render_template('login.html')
 
 @app.route('/register')
 def register():
     return render_template('register.html')
 
-@app.route('/mypage')
-def mypage():
-    return render_template('fav.html')
-    # try:
-    #     return render_template('fav.html')
-    # except jwt.ExpiredSignatureError:
-    #     return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    # except jwt.exceptions.DecodeError:
-    #     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-
-# @app.route('/coffee')
-# def detail():
-#     return render_template('coffeeDetail.html')
+@app.route('/mypage/<uid>')
+def mypage(uid):
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        if user_info['uid'] == int(uid):
+            return render_template('fav.html', nickname=user_info["nick"], uid=user_info["uid"])
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/coffee/<coffee_id>')
 def detail(coffee_id):
     token_receive = request.cookies.get('mytoken')
-    print(token_receive)
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        print(payload)
         user_info = db.user.find_one({"id": payload['id']})
-        print(user_info)
-        return render_template('coffeeDetail.html', coffee_id=coffee_id, uid=user_info['uid'], nickname=user_info["nick"], fav=user_info['fav'])
     except jwt.ExpiredSignatureError:
         return render_template('coffeeDetail.html', coffee_id=coffee_id)
     except jwt.exceptions.DecodeError:
@@ -134,7 +134,7 @@ def api_login():
         # exp에는 만료시간을 넣어줍니다. 만료시간이 지나면, 시크릿키로 토큰을 풀 때 만료되었다고 에러가 납니다.
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=120)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
@@ -145,9 +145,9 @@ def api_login():
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 # [아이디 중복 확인 API]
-@app.route('/api/idCheck', methods=['GET'])
+@app.route('/api/idCheck', methods=['POST'])
 def api_id_check():
-    id_receive = request.args.get('id')
+    id_receive = request.form['id_give']
 
     if db.user.find_one({"id": id_receive}) is None:
         return jsonify({'result': 'available'})
@@ -155,9 +155,9 @@ def api_id_check():
         return jsonify({'result': 'unavailable'})
 
 # [닉네임 중복 확인 API]
-@app.route('/api/nickCheck', methods=['GET'])
+@app.route('/api/nickCheck', methods=['POST'])
 def api_nick_check():
-    nick_receive = request.args.get('nick')
+    nick_receive = request.form['nick_give']
 
     if db.user.find_one({"nick": nick_receive}) is None:
         return jsonify({'result': 'available'})
@@ -204,31 +204,116 @@ def favorites_send():
 #################################
 ##마이페이지 즐겨찾기 리스트 API ##
 #################################
+# db.user.update_one({'uid': fave_id}, {'$set': {'fav': [{'coffee_id':1}, {'coffee_id':2}, {'coffee_id':20}, {'coffee_id':30}, {'coffee_id':60}, {'coffee_id':100}, {'coffee_id':200}, {'coffee_id':300}, {'coffee_id':231}]}})
+@app.route("/mypage/<fave_id>", methods=["GET"])
+def mypage_detail(fave_id):
+    fave_id = int(fave_id)
+    # 유저 id와 받아온 id가 같은 데이터
+    mypage_detail = db.user.find_one({"uid": fave_id}, {'_id': False})
+    # 데이터중 fav 데이터만 출력
+    fav_all= list(mypage_detail['fav'])
+    fav_num=[]
+    # fav데이터 추출한부분의 총길이만큼 반복
+    for coffee_id in fav_all:
+        fav_num.append(coffee_id['coffee_id'])
+    all_menu=[]
+    for i in fav_num:
+        for x in db.coffee.find({'coffee_id':i},{'_id':False}):
+            all_menu.append(x)
+    return jsonify({'mypage_detail': all_menu})
 
-@app.route("/coffees", methods=["GET"])
-def fave_get():
 
-    fav_list = [10,15,30,50,90,100,200,300,250,240,105]
-    # # for i in fav_list:
-    # #     a=(db.coffee.find({'coffee_id' : i},{'_id':False}))
-    # #     print("print a " + str(a))
-    return_list = []
-    for i in fav_list:
-        for a in db.coffee.find({'coffee_id' : i},{'_id':False}):
-            return_list.append(a)
+#즐겨찾기 스타벅스 메뉴 출력
+@app.route("/star_menu/<fave_id>" , methods=['GET'])
+def star_menu(fave_id):
+    fave_id = int(fave_id)
+    # 유저 id와 받아온 id가 같은 데이터
+    mypage_detail = db.user.find_one({"uid": fave_id}, {'_id': False})
+    # 데이터중 fav 데이터만 출력
+    fav_all = list(mypage_detail['fav'])
+    fav_num = []
+    # fav데이터 추출한부분의 총길이만큼 반복
+    for coffee_id in fav_all:
+        fav_num.append(coffee_id['coffee_id'])
+    all_menu = []
+    for i in fav_num:
+        for x in db.coffee.find({'coffee_id': i}, {'_id': False}):
+            all_menu.append(x)
+    return jsonify({'star': all_menu})
 
-    # print(return_list)
+#즐겨찾기 할리스 메뉴 출력
+@app.route("/hollys_menu/<fave_id>" , methods=['GET'])
+def hollys_menu(fave_id):
+    fave_id = int(fave_id)
+    # 유저 id와 받아온 id가 같은 데이터
+    mypage_detail = db.user.find_one({"uid": fave_id}, {'_id': False})
+    # 데이터중 fav 데이터만 출력
+    fav_all = list(mypage_detail['fav'])
+    fav_num = []
+    # fav데이터 추출한부분의 총길이만큼 반복
+    for coffee_id in fav_all:
+        fav_num.append(coffee_id['coffee_id'])
+    all_menu = []
+    for i in fav_num:
+        for x in db.coffee.find({'coffee_id': i}, {'_id': False}):
+            all_menu.append(x)
+    return jsonify({'hollys': all_menu})
 
-    return jsonify({'coffees':return_list})
+#즐겨찾기 이디야 메뉴 출력
+@app.route("/ediya_menu/<fave_id>" , methods=['GET'])
+def ediya_menu(fave_id):
+    fave_id = int(fave_id)
+    # 유저 id와 받아온 id가 같은 데이터
+    mypage_detail = db.user.find_one({"uid": fave_id}, {'_id': False})
+    # 데이터중 fav 데이터만 출력
+    fav_all = list(mypage_detail['fav'])
+    fav_num = []
+    # fav데이터 추출한부분의 총길이만큼 반복
+    for coffee_id in fav_all:
+        fav_num.append(coffee_id['coffee_id'])
+    all_menu = []
+    for i in fav_num:
+        for x in db.coffee.find({'coffee_id': i}, {'_id': False}):
+            all_menu.append(x)
+    return jsonify({'ediya': all_menu})
+#즐겨찾기 빽다방 메뉴 출력
+@app.route("/paik_menu/<fave_id>" , methods=['GET'])
+def paik_menu(fave_id):
+    fave_id = int(fave_id)
+    # 유저 id와 받아온 id가 같은 데이터
+    mypage_detail = db.user.find_one({"uid": fave_id}, {'_id': False})
+    # 데이터중 fav 데이터만 출력
+    fav_all = list(mypage_detail['fav'])
+    fav_num = []
+    # fav데이터 추출한부분의 총길이만큼 반복
+    for coffee_id in fav_all:
+        fav_num.append(coffee_id['coffee_id'])
+    all_menu = []
+    for i in fav_num:
+        for x in db.coffee.find({'coffee_id': i}, {'_id': False}):
+            all_menu.append(x)
 
+    return jsonify({'paik': all_menu})
+
+#즐겨찾기 전체 삭제
 @app.route("/delfav", methods=["post"])
-def web_mars_add():
-    id_receive = request.form['id_give']
-    coffee_id_receive = request.form['coffee_name_give']
-    return_list_receive = request.form['return_list_give']
+def del_all():
+    uid_receive=int(request.form['uid_give'])
 
-    fav_list = db.users.delete_one(return_list_receive)
-    return jsonify({'msg':'삭제완료' })
+    db.user.update_one({'uid':uid_receive},{'$set': {'fav' : []}})
+    return jsonify({'msg':'삭제완료'})
+
+#즐겨찾기 한개 삭제
+@app.route("/delfav_one", methods=["post"])
+def del_one():
+    uid_receive=int(request.form['uid_give'])
+
+
+    db.user.update_one({'uid':uid_receive},{'$pull': {'fav' : {'coffee_id':btn_receive}}})
+    return jsonify({'msg':'삭제완료'})
+
+
+
 
 
 #################################
