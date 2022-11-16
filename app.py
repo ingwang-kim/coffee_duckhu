@@ -207,18 +207,6 @@ def mypage_detail(fave_id):
     return jsonify({'mypage_detail': all_menu})
 
 
-# @app.route("/coffees", methods=["GET"])
-# def fave_get():
-#     fav_list = [10,15,30,50,90,100,200,300,250,240,105]
-#     # # for i in fav_list:
-#     # #     a=(db.coffee.find({'coffee_id' : i},{'_id':False}))
-#     # #     print("print a " + str(a))
-#     return_list = []
-#     for i in fav_list:
-#         for a in db.coffee.find({'coffee_id' : i},{'_id':False}):
-#             return_list.append(a)
-#     return jsonify({'coffees':return_list})
-
 #즐겨찾기 스타벅스 메뉴 출력
 @app.route("/star_menu/<fave_id>" , methods=['GET'])
 def star_menu(fave_id):
