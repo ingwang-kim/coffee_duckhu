@@ -9,7 +9,7 @@ function all_menu(){
     $('#menu_out').empty()
     $.ajax({
         type: 'GET',
-        url: '/mypage/'+uid,
+        url: '/api/mypage/'+uid,
         data: {},
         success: function (response) {
             let rows = (response['mypage_detail'])

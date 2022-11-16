@@ -205,7 +205,7 @@ def favorites_send():
 ##마이페이지 즐겨찾기 리스트 API ##
 #################################
 # db.user.update_one({'uid': fave_id}, {'$set': {'fav': [{'coffee_id':1}, {'coffee_id':2}, {'coffee_id':20}, {'coffee_id':30}, {'coffee_id':60}, {'coffee_id':100}, {'coffee_id':200}, {'coffee_id':300}, {'coffee_id':231}]}})
-@app.route("/mypage/<fave_id>", methods=["GET"])
+@app.route("/api/mypage/<fave_id>", methods=["GET"])
 def mypage_detail(fave_id):
     fave_id = int(fave_id)
     # 유저 id와 받아온 id가 같은 데이터
