@@ -1,5 +1,7 @@
 document.getElementById('navbarsExample09').addEventListener('click', (e)=>{
-    e.preventDefault();
-    $.removeCookie('mytoken');
-    window.location.href = '/';
+    if (e.target.id === 'logout-btn') {
+        e.preventDefault();
+        $.removeCookie('mytoken');
+        window.location.href = '/';
+    }
 })
