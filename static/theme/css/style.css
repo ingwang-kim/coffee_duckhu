@@ -17,6 +17,8 @@ VERSION:	1.0
 @import url("https://fonts.googleapis.com/css?family=Lato:400,600,700|Work+Sans:400,700,800");
 html {
   overflow-x: hidden;
+  position: relative;
+  height: 100%;
 }
 
 @font-face {
@@ -34,6 +36,8 @@ body {
   letter-spacing: 0.166667px;
   line-height: 1.7em;
   color: #818385;
+  position: relative;
+  height: 100%;
 }
 
 p {
@@ -130,7 +134,23 @@ h6, .h6 {
   background: transparent;
   color: #fff;
 }
-
+.close_btn{
+  display:inline-block;
+  *display:inline;
+  float: right;
+  background-color:transparent;
+  border: 0;
+  outline: 0;
+}
+.close_btn:after{
+  display: inline-block;
+  content: "\00d7";
+  padding-top: 5px;
+  font-size:30pt;
+}
+.all_del{
+  float: right;
+}
 a {
   color: #000;
   transition: all 0.25s ease;
@@ -398,7 +418,7 @@ ul.dropdown-menu > li > a:hover, .navbar ul ul ul.dropdown-menu li .nav-link:hov
   overflow: hidden;
 }
 
-.inner-box .image .overlay-box:before {
+.inner-box:hover .image .overlay-box:before {
   position: absolute;
   content: "";
   left: -450px;
@@ -415,20 +435,19 @@ ul.dropdown-menu > li > a:hover, .navbar ul ul ul.dropdown-menu li .nav-link:hov
   transform: scale(1.1);
 }
 
-.inner-box:hover .image .overlay-box:before {
-  opacity: 1;
-  left: 0px;
-}
-
 .inner-box:hover .image .overlay-box {
   opacity: 1;
 }
 
-.inner-box:hover .image .overlay-box .overlay-content h5 {
+.inner-box .image .overlay-box {
+  opacity: 1;
+}
+
+.inner-box .image .overlay-box .overlay-content h5 {
   transform: translateX(0px);
 }
 
-.inner-box:hover .image .overlay-box .overlay-content p {
+.inner-box .image .overlay-box .overlay-content p {
   transform: translateX(0px);
 }
 
@@ -460,7 +479,7 @@ ul.dropdown-menu > li > a:hover, .navbar ul ul ul.dropdown-menu li .nav-link:hov
   font-size: 14px;
   margin-bottom: 0px;
   padding: 0px 8px;
-  margin-top: 2px;
+  margin-top: 15px;
   text-transform: capitalize;
   background: rgba(255, 255, 255, 0.9);
   color: #2f3238;
@@ -758,4 +777,59 @@ textarea.form-control {
 .footer-widget a:hover {
   color: #f44336;
 }
+/* style추가 */
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width: 600px;
+  height: 321px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  background: white;
+  display: block;
+  width: 600px;
+  height: 321px;
+  object-fit: cover;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: gray;
+}
+
+h4 {
+  text-align: center;
+}
+
+.overlay-box { /* 현재 즐겨찾기 숫자 */
+  margin: 10px;
+}
+
 /*# sourceMappingURL=style.css.map */
