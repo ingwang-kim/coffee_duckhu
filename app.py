@@ -218,11 +218,10 @@ def web_mars_add():
 ##        커피상세정보 API      ##
 #################################
 
-# 커피상세정보 GET dusssㄴㄴ여기 라우트에 써진 1 값 읽는법 없는지 알아야해 이걸 읽어서 저 222번째줄 '커피아이디':1 여기 넣어줘야해
-# 알겠엉? 누구한테 물어봐? 동료들한테
+# 커피상세정보 GET
 @app.route('/coffee/1', methods=["GET"])
 def get_coffee_detail():
-    coffee_detail = list(db.coffee.find({'coffee_id': 4}, {'_id': False}))
+    coffee_detail = list(db.coffee.find({'coffee_id': 5}, {'_id': False}))
     # print(coffee_detail)
     return jsonify({'detail': coffee_detail})
 
@@ -235,6 +234,7 @@ def get_coffee_comment():
 
 #comment POST
 @app.route("/comment", methods=["POST"])
+
 def post_coffee_comment():
     comment_receive = request.form['comment_give']
     id_receive = request.form['id_give']

@@ -1,23 +1,23 @@
 
      $(document).ready(function () {
-
-                get_comment()
+         get_comment()
          get_coffee_detail();
-            });
-            function get_comment() {
-                $.ajax({
-                    type: "GET",
-                    url: `/comment`,
-                    data: {},
-                    success: function (response) {
-                        let rows = response['comment']
-                        for(let i =0; i<rows.length; i++){
+     });
 
-                            let id = rows[i]['id']
-                            let comment = rows[i]['comment']
-                            console.log(id)
-                            console.log(comment)
-                            let comment_html = `<div class="comment">
+     function get_comment() {
+         $.ajax({
+             type: "GET",
+             url: `/comment`,
+             data: {},
+             success: function (response) {
+                 let rows = response['comment']
+                 for (let i = 0; i < rows.length; i++) {
+
+                     let id = rows[i]['id']
+                     let comment = rows[i]['comment']
+                     console.log(id)
+                     console.log(comment)
+                     let comment_html = `<div class="comment">
                                                     <div class="comment-header">
                                                         <p>ID : ${id}</p>
                                                     </div>
@@ -28,32 +28,33 @@
                                                     </div>
                                                     <div class="divider"></div>
                                                 </div>`
-                            $('#comments').append(comment_html)
-                        }
-                    }
-                })
-            }
-            function get_coffee_detail(){
-                let coffee_id = 1
-                $.ajax({
-                    type: "GET",
-                    url: `/coffee/1`,
-                    data: {},
-                    success: function (response) {
-                        console.log(response)
-                        let rows = response['detail']
-                        console.log(rows[0])
-                        let caffeine = rows[0]["caffeine"]
-                        let calorie = rows[0]["calorie"]
-                        let coffee_desc = rows[0]["coffee_desc"]
-                        let coffee_image= rows[0]["coffee_image"]
-                        let coffee_name = rows[0]["coffee_name"]
-                        let protein = rows[0]["protein"]
-                        let salt = rows[0]["salt"]
-                        let saturated_fat = rows[0]["saturated_fat"]
-                        let sugars =rows[0]["sugars"]
+                     $('#comments').append(comment_html)
+                 }
+             }
+         })
+     }
 
-                        let detail_ing =`<img className = "myimage" src =${coffee_image} alt =${coffee_name}>
+     function get_coffee_detail() {
+         let coffee_id = 1
+         $.ajax({
+             type: "GET",
+             url: `/coffee/1`,
+             data: {},
+             success: function (response) {
+                 console.log(response)
+                 let rows = response['detail']
+                 console.log(rows[0])
+                 let caffeine = rows[0]["caffeine"]
+                 let calorie = rows[0]["calorie"]
+                 let coffee_desc = rows[0]["coffee_desc"]
+                 let coffee_image = rows[0]["coffee_image"]
+                 let coffee_name = rows[0]["coffee_name"]
+                 let protein = rows[0]["protein"]
+                 let salt = rows[0]["salt"]
+                 let saturated_fat = rows[0]["saturated_fat"]
+                 let sugars = rows[0]["sugars"]
+
+                 let detail_ing = `<img className = "myimage" src =${coffee_image} alt =${coffee_name}>
                                                 <div className = "favorite-container" onclick="favoriteOnClick()">
                                                     <img className = "favorite-btn" style="height: 50px" src="https://cdn0.iconfinder.com/data/icons/shop_icons/256/star.png" alt="Bookmark icon></img>
                                                 </div>
@@ -74,24 +75,26 @@
                                                 </ul>
                                             </div>`
 
-                        $('#main').append(detail_ing)
-                    }
-                })
-            }
-            function save_coffee_comment(){
-                let comment = $('#comment-field').val()
-                let id = 999
-                console.log(comment)
-                $.ajax({
-                    type: 'POST',
-                    url: '/comment',
-                    data: {comment_give: comment, id_give: id},
-                    success: function (response) {
-                        alert('댓글 등록 완료')
-                        window.location.reload()
-                    }
-                })
-            }
-            function favoriteOnClick(){
-                console.log('즐겨찾기')
-            }
+                 $('#main').append(detail_ing)
+             }
+         })
+     }
+
+     function save_coffee_comment() {
+         let comment = $('#comment-field').val()
+         let id = 999
+         console.log(comment)
+         $.ajax({
+             type: 'POST',
+             url: '/comment',
+             data: {comment_give: comment, id_give: id},
+             success: function (response) {
+                 alert('댓글 등록 완료')
+                 window.location.reload()
+             }
+         })
+     }
+
+     function favoriteOnClick() {
+         console.log('즐겨찾기')
+     }
