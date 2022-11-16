@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>커피덕후 | 커피에 진심</title>
+
+    <!-- mobile responsive meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- theme meta -->
+    <meta name="theme-name" content="thomson"/>
+
+    <!-- ** Plugins Needed for the Project ** -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/static/theme/plugins/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/theme/plugins/themify/css/themify-icons.css">
+    <link rel="stylesheet" href="/static/theme/plugins/counto/animate.css">
+    <link rel="stylesheet" href="/static/theme/plugins/aos/aos.css">
+    <link rel="stylesheet" href="/static/theme/plugins/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/theme/plugins/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/static/theme/plugins/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="/static/theme/plugins/animated-text/animated-text.css">
+
+    <!-- Main Stylesheet -->
+    <link href="/static/theme/css/style.css" rel="stylesheet">
+    <style>
+        ul{
+            padding-inline-start: 0
+        }
+        .main_container {
+            display: flex;
+            /*background-color: #1d2124;*/
+            width: 100%;
+            padding: 20px;
+        }
+        .myimage {
+            color: green;
+            position: relative;
+            width: 360px;
+            height: 360px;
+            /*background-color: #0b0b0b;*/
+            float: left;
+        }
+        .favorite-btn {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            top: 0;
+            left: 0;
+            margin: 10px;
+        }
+        .ingredient-container {
+            /*background-color: rebeccapurple;*/
+            margin-left: 20px;
+        }
+        .coffee-desc {
+            max-width: 320px;
+            word-break: break-word;
+        }
+        .ingredient-list{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            list-style: none;
+        }
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: black;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .ingredient-list {
+            list-style: none;
+        }
+        /*  댓글부분 css  */
+        .comment-textarea-container{
+            /*background-color: yellow;*/
+            width: 100%;
+            padding: 20px;
+        }
+        .comment-textarea {
+            width: 100%;
+            height: 80px;
+        }
+
+        .comments-container{
+            /*background-color: aqua;*/
+            padding: 20px;
+        }
+
+    </style>
+    <!-- Main Script -->
+    <script src="/js/coffeeDetail.js">
+
+    </script>
+
+</head>
+
+<body>
+<!-- Navigation Start -->
+<!-- Header Start -->
+<nav class="navbar navbar-expand-lg  main-nav " id="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="/static/theme/images/logo.png" alt="" class="img-fluid">
+        </a>
+
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample09"
+                aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="ti-align-justify"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item  active"><a class="nav-link" href="index.html">Home</a></li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">About</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                        <li><a class="dropdown-item" href="about.html">About Me</a></li>
+                        <li><a class="dropdown-item" href="about-us.html">About Us</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Portfolio</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                        <li><a class="dropdown-item" href="portfolio-1.html">Portfolio Masonary</a></li>
+                        <li><a class="dropdown-item" href="portfolio-2.html">Portfolio lightbox</a></li>
+                        <li><a class="dropdown-item" href="portfolio-3.html">Portfolio 2 column</a></li>
+                        <li><a class="dropdown-item" href="portfolio-single.html">Portfolio Details</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Blog</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown05">
+                        <li><a class="dropdown-item" href="blog-grid.html">Blog Grid</a></li>
+                        <li><a class="dropdown-item" href="blog-sidebar.html">Blog with Sidebar</a></li>
+
+                        <li><a class="dropdown-item" href="blog-single.html">Blog Single</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 메인 컨테이너 -->
+<div class="main_container" id="main"></div>
+<div class="comment-textarea-container"><div>
+        <h5>댓글남기기</h5>
+        <div class="comment-input">
+            <textarea id="comment-field" aria-label="text-input" class="comment-textarea" placeholder="Leave a comment here" id="comment" >
+            </textarea>
+        </div>
+        <button onclick="save_coffee_comment()" type="button" class="btn btn-dark">
+            등록
+        </button>
+    </div>
+</div>
+<div class="comments-container" id="comments">
+</div>
+</body>
+
+<!-- jQuery -->
+<script src="/static/theme/plugins/jQuery/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="/static/theme/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="/static/theme/plugins/aos/aos.js"></script>
+<script src="/static/theme/plugins/owl-carousel/owl.carousel.min.js"></script>
+<script src="/static/theme/plugins/shuffle/shuffle.min.js"></script>
+<script src="/static/theme/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/static/theme/plugins/animated-text/animated-text.js"></script>
+<script src="/static/theme/plugins/counto/apear.js"></script>
+<script src="/static/theme/plugins/counto/counTo.js"></script>
+
+<script src="/static/theme/js/script.js"></script>
+<script src="/static/js/coffeeDetail.js"></script>
+
+
+
+</html>
