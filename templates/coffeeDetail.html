@@ -98,6 +98,7 @@
             padding: 20px;
         }
 
+
     </style>
     <!-- Main Script -->
     <script src="/js/coffeeDetail.js">
@@ -107,9 +108,11 @@
 </head>
 
 <body>
-<!-- Navigation Start -->
-<!-- Header Start -->
+<input type="hidden" value="{{coffee_id}}" id="coffee_id">
+
+<!-- 네비게이션 바 -->
 {% include "nav.html" %}
+
 <!-- 메인 컨테이너 -->
 <div class="main_container" id="main"></div>
 <div class="comment-textarea-container"><div>

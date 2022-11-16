@@ -70,14 +70,15 @@ def mypage():
     # except jwt.exceptions.DecodeError:
     #     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
-@app.route('/coffee')
-def detail():
-    return render_template('coffeeDetail.html')
+# @app.route('/coffee')
+# def detail():
+#     return render_template('coffeeDetail.html')
 
+@app.route('/coffee/<coffee_id>')
+def detail(coffee_id):
+    return render_template('coffeeDetail.html', coffee_id=coffee_id)
 
 ##############################
-
-
 ##  로그인을 위한 API            ##
 #################################
 
@@ -221,31 +222,34 @@ def web_mars_add():
 #################################
 
 # 커피상세정보 GET
-@app.route('/coffee/1', methods=["GET"])
-def get_coffee_detail():
-    coffee_detail = list(db.coffee.find({'coffee_id': 5}, {'_id': False}))
+@app.route('/api/coffee/<coffee_id>', methods=["GET"])
+def get_coffee_detail(coffee_id):
+    coffee_id = int(coffee_id)
+    coffee_detail = list(db.coffee.find({'coffee_id': coffee_id}, {'_id': False}))
     # print(coffee_detail)
     return jsonify({'detail': coffee_detail})
 
 #comment GET
-@app.route('/comment', methods=["GET"])
-def get_coffee_comment():
-    coffee_comment = list(db.comment.find({}, {'_id': False}))
-    # print(coffee_comment)
+@app.route('/api/comment/<coffee_id>', methods=["GET"])
+def get_coffee_comment(coffee_id):
+    coffee_id = int(coffee_id)
+    coffee_comment = list(db.comment.find({'coffee_id': coffee_id}, {'_id': False}))
+    print(db.comment)
+    print(coffee_comment)
     return jsonify({'comment': coffee_comment})
 
 #comment POST
-@app.route("/comment", methods=["POST"])
-
-def post_coffee_comment():
+@app.route("/api/comment/<coffee_id>", methods=["POST"])
+def post_coffee_comment(coffee_id):
+    coffeeId_receive = int(coffee_id)
     comment_receive = request.form['comment_give']
     id_receive = request.form['id_give']
 
-    # bucket_list = list(db.bucket.find({}, {'_id': False}))
-    # count = len(bucket_list) + 1
-
     doc = {
-        'id': id_receive,
+        # 커피 아이디 를 기준으로 디테일 커피에 코멘트를 뿌려줌
+        'coffee_id': coffeeId_receive,
+        # user_id 구별
+        'user_id': id_receive,
         'comment': comment_receive
     }
 
