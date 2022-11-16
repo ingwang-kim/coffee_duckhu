@@ -42,7 +42,9 @@ def home():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        print(payload)
         user_info = db.user.find_one({"id": payload['id']})
+
         print(result)
         return render_template('index.html', variable=result, nickname=user_info["nick"])
     except jwt.ExpiredSignatureError:
@@ -76,7 +78,19 @@ def mypage():
 
 @app.route('/coffee/<coffee_id>')
 def detail(coffee_id):
-    return render_template('coffeeDetail.html', coffee_id=coffee_id)
+    token_receive = request.cookies.get('mytoken')
+    print(token_receive)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        print(payload)
+        user_info = db.user.find_one({"id": payload['id']})
+        print(user_info)
+        return render_template('coffeeDetail.html', coffee_id=coffee_id, uid=user_info['uid'], nickname=user_info["nick"], fav=user_info['fav'])
+    except jwt.ExpiredSignatureError:
+        return render_template('coffeeDetail.html', coffee_id=coffee_id)
+    except jwt.exceptions.DecodeError:
+        return render_template('coffeeDetail.html', coffee_id=coffee_id)
+
 
 ##############################
 ##  로그인을 위한 API            ##
@@ -234,22 +248,21 @@ def get_coffee_detail(coffee_id):
 def get_coffee_comment(coffee_id):
     coffee_id = int(coffee_id)
     coffee_comment = list(db.comment.find({'coffee_id': coffee_id}, {'_id': False}))
-    print(db.comment)
-    print(coffee_comment)
     return jsonify({'comment': coffee_comment})
 
 #comment POST
 @app.route("/api/comment/<coffee_id>", methods=["POST"])
 def post_coffee_comment(coffee_id):
-    coffeeId_receive = int(coffee_id)
+    coffee_id_receive = int(coffee_id)
     comment_receive = request.form['comment_give']
     id_receive = request.form['id_give']
+    nickname_receive = request.form['nickname_give']
+
 
     doc = {
-        # 커피 아이디 를 기준으로 디테일 커피에 코멘트를 뿌려줌
-        'coffee_id': coffeeId_receive,
-        # user_id 구별
+        'coffee_id': coffee_id_receive,
         'user_id': id_receive,
+        'nickname': nickname_receive,
         'comment': comment_receive
     }
 
