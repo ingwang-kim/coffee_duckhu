@@ -52,6 +52,7 @@ function starbucks() {
         success: function (response) {
             $('#wrap').empty()
             let rows = response['starbucks']
+            let number = 2;
             for (let i = 0; i < rows.length; i++) {
                 let id = rows[i]['coffee_id']
                 let name = rows[i]['coffee_name']
@@ -60,7 +61,7 @@ function starbucks() {
                             <div class="position-relative inner-box">
                             <div class="image position-relative ">
                             <h3><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            style="margin-top: 8px; opacity: 1; z-index: 1; transform: scale(1.1);" >99+</h3></span>
+                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${number}++</h3></span>
                             <img src="${url}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
                             <div class="overlay-inner">
