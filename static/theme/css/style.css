@@ -428,6 +428,10 @@ ul.dropdown-menu > li > a:hover, .navbar ul ul ul.dropdown-menu li .nav-link:hov
   transform: scale(1.1);
 }
 
+.inner-box:hover .image .overlay-box {
+  opacity: 1;
+}
+
 .inner-box .image .overlay-box {
   opacity: 1;
 }
@@ -816,4 +820,9 @@ body {
 h4 {
   text-align: center;
 }
+
+.overlay-box { /* 현재 즐겨찾기 숫자 */
+  margin: 10px;
+}
+
 /*# sourceMappingURL=style.css.map */
