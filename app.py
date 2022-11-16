@@ -86,6 +86,7 @@ def detail(coffee_id):
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
+        return render_template('coffeeDetail.html', coffee_id=coffee_id, nickname=user_info["nick"], uid=user_info["uid"])
     except jwt.ExpiredSignatureError:
         return render_template('coffeeDetail.html', coffee_id=coffee_id)
     except jwt.exceptions.DecodeError:
@@ -319,7 +320,6 @@ def paik_menu(fave_id):
 @app.route("/delfav", methods=["post"])
 def del_all():
     uid_receive=int(request.form['uid_give'])
-
     db.user.update_one({'uid':uid_receive},{'$set': {'fav' : []}})
     return jsonify({'msg':'삭제완료'})
 
@@ -327,8 +327,7 @@ def del_all():
 @app.route("/delfav_one", methods=["post"])
 def del_one():
     uid_receive=int(request.form['uid_give'])
-
-
+    btn_receive = int(request.form['coffe_id_give'])
     db.user.update_one({'uid':uid_receive},{'$pull': {'fav' : {'coffee_id':btn_receive}}})
     return jsonify({'msg':'삭제완료'})
 

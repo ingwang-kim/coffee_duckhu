@@ -27,14 +27,14 @@ function ediya() {
                             <div class="position-relative inner-box">
                             <div class="image position-relative ">
                             <h3><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</h3></span>
+                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</span></h3>
                             <img src="${url}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
                             <div class="overlay-inner">
-                            <a class="overlay-content" onclick="favorites_send();">
+                            <a class="overlay-content">
                             <h5 class="mb-0">${name}</h5>
                             <p class="test" onclick="send_id(${id})" style="cursor: pointer">즐겨찾기 등록</p>
-                            <p onclick="location.href='/coffee/1.html'" style="cursor: pointer">상세페이지 이동</p>
+                            <p onclick="location.href='/coffee/${id}'" style="cursor: pointer">상세페이지 이동</p>
                             </a>
                             </div>
                             </div>
@@ -64,14 +64,14 @@ function starbucks() {
                             <div class="position-relative inner-box">
                             <div class="image position-relative ">
                             <h3><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</h3></span>
+                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</span></h3>
                             <img src="${url}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
                             <div class="overlay-inner">
-                            <a class="overlay-content" onclick="favorites_send();">
+                            <a class="overlay-content">
                             <h5 class="mb-0">${name}</h5>
                             <p class="test" onclick="send_id(${id})" style="cursor: pointer">즐겨찾기 등록</p>
-                            <p onclick="location.href='/coffee/1.html'" style="cursor: pointer">상세페이지 이동</p>
+                            <p onclick="location.href='/coffee/${id}'" style="cursor: pointer">상세페이지 이동</p>
                             </a>
                             </div>
                             </div>
@@ -102,14 +102,14 @@ function hollys() {
                             <div class="position-relative inner-box">
                             <div class="image position-relative ">
                             <h3><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</h3></span>
+                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</span></h3>
                             <img src="${url}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
                             <div class="overlay-inner">
-                            <a class="overlay-content" onclick="favorites_send();">
+                            <a class="overlay-content">
                             <h5 class="mb-0">${name}</h5>
                             <p class="test" onclick="send_id(${id})" style="cursor: pointer">즐겨찾기 등록</p>
-                            <p onclick="location.href='/coffee/1.html'" style="cursor: pointer">상세페이지 이동</p>
+                            <p onclick="location.href='/coffee/${id}'" style="cursor: pointer">상세페이지 이동</p>
                             </a>
                             </div>
                             </div>
@@ -139,14 +139,14 @@ function paikdabang() {
                             <div class="position-relative inner-box">
                             <div class="image position-relative ">
                             <h3><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</h3></span>
+                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</span></h3>
                             <img src="${url}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
                             <div class="overlay-inner">
-                            <a class="overlay-content" onclick="favorites_send();">
+                            <a class="overlay-content">
                             <h5 class="mb-0">${name}</h5>
                             <p class="test" onclick="send_id(${id})" style="cursor: pointer">즐겨찾기 등록</p>
-                            <p onclick="location.href='/coffee/1.html'" style="cursor: pointer">상세페이지 이동</p>
+                            <p onclick="location.href='/${id}'" style="cursor: pointer">상세페이지 이동</p>
                             </a>
                             </div>
                             </div>
