@@ -73,7 +73,9 @@ def detail():
     return render_template('coffeeDetail.html')
 
 
-#################################
+##############################
+
+
 ##  로그인을 위한 API            ##
 #################################
 
@@ -189,7 +191,6 @@ def favorites_send():
 @app.route("/coffees", methods=["GET"])
 def fave_get():
 
-
     fav_list = [10,15,30,50,90,100,200,300,250,240,105]
     # # for i in fav_list:
     # #     a=(db.coffee.find({'coffee_id' : i},{'_id':False}))
@@ -217,10 +218,11 @@ def web_mars_add():
 ##        커피상세정보 API      ##
 #################################
 
-# 커피상세정보 GET
+# 커피상세정보 GET dusssㄴㄴ여기 라우트에 써진 1 값 읽는법 없는지 알아야해 이걸 읽어서 저 222번째줄 '커피아이디':1 여기 넣어줘야해
+# 알겠엉? 누구한테 물어봐? 동료들한테
 @app.route('/coffee/1', methods=["GET"])
 def get_coffee_detail():
-    coffee_detail = list(db.coffee.find({'coffee_id': 1}, {'_id': False}))
+    coffee_detail = list(db.coffee.find({'coffee_id': 4}, {'_id': False}))
     # print(coffee_detail)
     return jsonify({'detail': coffee_detail})
 
@@ -251,4 +253,4 @@ def post_coffee_comment():
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=4000, debug=True)
