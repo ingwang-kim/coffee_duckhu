@@ -39,41 +39,12 @@
 
 </head>
 
-<script>
-
-
-    function all_del() {
-        if( window.confirm('전체 삭제 하시겠습니까?')) {
-            console.log('coffee_id : '+coffee_id)
-            $.ajax({
-                type: 'POST',
-                url: '/delfav',
-                data: {
-                    // id_give: id,
-                    coffee_name_give: coffee_id,
-                },
-
-                success: function (response) {
-                    console.log(response)
-                    alert(response['msg'])
-                    window.location.reload()
-                }
-            });
-        }
-        else {
-            console.log('취소')
-        }
-
-    }
-
-
-</script>
-
 <body>
 
 <!-- Navigation Start -->
 <!-- Header Start -->
 {% include "nav.html" %}
+<input type="hidden" value="{{uid}}" id="uid">
 <section class="portfolio ">
     <div class="container">
         <!--정렬 라벨-->
@@ -81,19 +52,19 @@
             <div class="col-10">
                 <div class="btn-group btn-group-toggle " data-toggle="buttons">
                     <label class="btn active ">
-                        <input type="radio" name="shuffle-filter" value="all" checked="checked"/>전체 보기
+                        <input type="radio" name="shuffle-filter" value="all" checked="checked" onclick="all_menu()"/>전체 보기
                     </label>
                     <label class="btn">
-                        <input type="radio" name="shuffle-filter" value="design"/>스타벅스
+                        <input type="radio" name="shuffle-filter" value="design" onclick="star_menu()"/>스타벅스
                     </label>
                     <label class="btn">
-                        <input type="radio" name="shuffle-filter" value="branding"/>할리스
+                        <input type="radio" name="shuffle-filter" value="branding" onclick="hollys_menu()"/>할리스
                     </label>
                     <label class="btn">
-                        <input type="radio" name="shuffle-filter" value="branding"/>이디야
+                        <input type="radio" name="shuffle-filter" value="branding" onclick="ediya_menu()"/>이디야
                     </label>
                     <label class="btn">
-                        <input type="radio" name="shuffle-filter" value="branding"/>빽다방
+                        <input type="radio" name="shuffle-filter" value="branding" onclick="paik_menu()"/>빽다방
                     </label>
                 </div>
 
