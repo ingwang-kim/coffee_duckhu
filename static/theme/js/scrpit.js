@@ -4,9 +4,7 @@
  * FACEBOOK: https://www.facebook.com/themefisher
  * GITHUB: https://github.com/themefisher/
  */
-$(document).ready(function () {
-    starbucks();
-});
+
 // 커피별 GET 함수
 function ediya() {
     $.ajax({
@@ -39,7 +37,6 @@ function ediya() {
                             </div>`
                 $('#wrap').append(temp_html)
             }
-
         }
     })
 }
@@ -180,3 +177,4 @@ var swiper = new Swiper(".mySwiper", {
 			disableOnInteraction: false, // 화살표 눌러도 autoplay 멈추지 않음
 		  },
       });
+
