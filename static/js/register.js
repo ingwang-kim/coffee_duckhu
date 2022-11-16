@@ -48,9 +48,11 @@ function id_duple_check() {
         id_duple_flag = false;
     } else {
         $.ajax({
-        type: "GET",
-        url: "/api/idCheck?id=" + id_elem.value,
-        data: {},
+        type: "POST",
+        url: "/api/idCheck",
+        data: {
+            id_give: id_elem.value
+        },
         success: function (response) {
             if (response['result'] == 'available') {
                 font_color_change(id_msg_elem, "success");
@@ -59,6 +61,7 @@ function id_duple_check() {
                 id_duple_flag = true;
             } else {
                 font_color_change(id_msg_elem, "danger");
+                id_elem.value = '';
                 id_msg_elem.innerText = '이미 사용중인 아이디입니다.';
                 alert('이미 사용중인 아이디입니다.');
                 id_duple_flag = false;
@@ -77,9 +80,11 @@ function nick_duple_check() {
         nick_duple_flag = false;
     } else {
         $.ajax({
-        type: "GET",
-        url: "/api/nickCheck?nick=" + nick_elem.value,
-        data: {},
+        type: "POST",
+        url: "/api/nickCheck",
+        data: {
+            nick_give: nick_elem.value
+        },
         success: function (response) {
             if (response['result'] == 'available') {
                 font_color_change(nick_msg_elem, "success");
@@ -88,6 +93,7 @@ function nick_duple_check() {
                 nick_duple_flag = true;
             } else {
                 font_color_change(nick_msg_elem, "danger");
+                nick_elem.value = '';
                 nick_msg_elem.innerText = '이미 사용중인 닉네임입니다.';
                 alert('이미 사용중인 닉네임입니다.');
                 nick_duple_flag = false;

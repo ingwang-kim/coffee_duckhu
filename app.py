@@ -52,28 +52,44 @@ def home():
 
 @app.route('/login')
 def login():
-    msg = request.args.get("msg")
-    return render_template('login.html', msg=msg)
-
-@app.route('/register')
-def register():
-    return render_template('register.html')
-
-@app.route('/mypage')
-def mypage():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
         return render_template('fav.html', nickname=user_info["nick"], uid=user_info["uid"])
     except jwt.ExpiredSignatureError:
+        return render_template('login.html')
+    except jwt.exceptions.DecodeError:
+        return render_template('login.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/mypage/<uid>')
+def mypage(uid):
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        if user_info['uid'] == int(uid):
+            return render_template('fav.html', nickname=user_info["nick"], uid=user_info["uid"])
+    except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
-@app.route('/coffee')
-def detail():
-    return render_template('coffeeDetail.html')
+@app.route('/coffee/<coffee_id>')
+def detail(coffee_id):
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        return render_template('coffeeDetail.html', coffee_id=coffee_id, nickname=user_info["nick"], uid=user_info["uid"])
+    except jwt.ExpiredSignatureError:
+        return render_template('coffeeDetail.html', coffee_id=coffee_id)
+    except jwt.exceptions.DecodeError:
+        return render_template('coffeeDetail.html', coffee_id=coffee_id)
 
 
 #################################
@@ -129,9 +145,9 @@ def api_login():
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 # [아이디 중복 확인 API]
-@app.route('/api/idCheck', methods=['GET'])
+@app.route('/api/idCheck', methods=['POST'])
 def api_id_check():
-    id_receive = request.args.get('id')
+    id_receive = request.form['id_give']
 
     if db.user.find_one({"id": id_receive}) is None:
         return jsonify({'result': 'available'})
@@ -139,9 +155,9 @@ def api_id_check():
         return jsonify({'result': 'unavailable'})
 
 # [닉네임 중복 확인 API]
-@app.route('/api/nickCheck', methods=['GET'])
+@app.route('/api/nickCheck', methods=['POST'])
 def api_nick_check():
-    nick_receive = request.args.get('nick')
+    nick_receive = request.form['nick_give']
 
     if db.user.find_one({"nick": nick_receive}) is None:
         return jsonify({'result': 'available'})
@@ -221,9 +237,10 @@ def web_mars_add():
 #################################
 
 # 커피상세정보 GET
-@app.route('/coffee/1', methods=["GET"])
-def get_coffee_detail():
-    coffee_detail = list(db.coffee.find({'coffee_id': 1}, {'_id': False}))
+@app.route('/api/coffee/<coffee_id>', methods=["GET"])
+def get_coffee_detail(coffee_id):
+    coffee_id = int(coffee_id)
+    coffee_detail = list(db.coffee.find({'coffee_id': coffee_id}, {'_id': False}))
     # print(coffee_detail)
     return jsonify({'detail': coffee_detail})
 
