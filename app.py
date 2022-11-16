@@ -197,8 +197,28 @@ def dabang_GET():
 
 @app.route("/favorites_send", methods=['POST'])
 def favorites_send():
-    coffee_id = request.form['coffee_id']
-    return jsonify({'msg': coffee_id})
+    coffee_id = int(request.form['coffee_id'])
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+
+        # 즐겨찾기 카운트 증가
+        current_favorites_number = db.coffee.find_one({'coffee_id': coffee_id})
+        number = int(current_favorites_number['favorites'])
+        favorites_number = number + 1
+
+        uid = int(user_info["uid"]) # uid 저장 int 10
+        detail = db.user.find_one({'uid': uid, 'fav.coffee_id': coffee_id}, {'_id': False})
+
+        if detail is None:
+            db.coffee.update_one({'coffee_id': coffee_id}, {'$set': {'favorites': favorites_number}})
+            db.user.update_one({'uid': uid}, {'$push': {'fav': {'coffee_id': coffee_id}}})
+            return jsonify({'msg': '즐겨찾기 등록이 완료되었습니다.', 'cafe': coffee_id})
+        else:
+            return jsonify({'msg': '이미 즐겨찾기 목록에 들어 있습니다.'})
+    except jwt.exceptions.DecodeError:
+        return jsonify({'msg': '로그인을 해주세요.'})
 
 
 #################################
