@@ -1,0 +1,10 @@
+.btn-light-style {
+    display: inline-block;
+    font-size: 13px;
+    padding: 6px 18px;
+    line-height: 20px;
+    border: 2px solid #fff;
+    background: #fff;
+    border-radius: 4px;
+    color: #212529;
+}
