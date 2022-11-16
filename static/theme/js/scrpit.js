@@ -5,6 +5,9 @@
  * FACEBOOK: https://www.facebook.com/themefisher
  * GITHUB: https://github.com/themefisher/
  */
+$(document).ready(function () {
+    starbucks();
+})
 
 // 커피별 GET 함수
 function ediya() {
