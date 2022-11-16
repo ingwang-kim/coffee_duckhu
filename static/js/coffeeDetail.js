@@ -34,10 +34,10 @@
                 })
             }
             function get_coffee_detail(){
-                let coffee_id = 1
+                let coffee_id = document.getElementById('coffee_id').value;
                 $.ajax({
                     type: "GET",
-                    url: `/coffee/1`,
+                    url: `/api/coffee/` + coffee_id,
                     data: {},
                     success: function (response) {
                         console.log(response)
