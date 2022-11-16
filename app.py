@@ -42,6 +42,7 @@ def home():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        print(payload)
         user_info = db.user.find_one({"id": payload['id']})
         return render_template('index.html', variable=result, nickname=user_info["nick"], uid=user_info["uid"])
     except jwt.ExpiredSignatureError:
@@ -85,14 +86,13 @@ def detail(coffee_id):
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
-        return render_template('coffeeDetail.html', coffee_id=coffee_id, nickname=user_info["nick"], uid=user_info["uid"])
     except jwt.ExpiredSignatureError:
         return render_template('coffeeDetail.html', coffee_id=coffee_id)
     except jwt.exceptions.DecodeError:
         return render_template('coffeeDetail.html', coffee_id=coffee_id)
 
 
-#################################
+##############################
 ##  로그인을 위한 API            ##
 #################################
 
@@ -303,12 +303,11 @@ def del_all():
     db.user.update_one({'uid':uid_receive},{'$set': {'fav' : []}})
     return jsonify({'msg':'삭제완료'})
 
-
 #즐겨찾기 한개 삭제
 @app.route("/delfav_one", methods=["post"])
 def del_one():
     uid_receive=int(request.form['uid_give'])
-    btn_receive=int(request.form['coffe_id_give'])
+
 
     db.user.update_one({'uid':uid_receive},{'$pull': {'fav' : {'coffee_id':btn_receive}}})
     return jsonify({'msg':'삭제완료'})
@@ -330,23 +329,25 @@ def get_coffee_detail(coffee_id):
     return jsonify({'detail': coffee_detail})
 
 #comment GET
-@app.route('/comment', methods=["GET"])
-def get_coffee_comment():
-    coffee_comment = list(db.comment.find({}, {'_id': False}))
-    # print(coffee_comment)
+@app.route('/api/comment/<coffee_id>', methods=["GET"])
+def get_coffee_comment(coffee_id):
+    coffee_id = int(coffee_id)
+    coffee_comment = list(db.comment.find({'coffee_id': coffee_id}, {'_id': False}))
     return jsonify({'comment': coffee_comment})
 
 #comment POST
-@app.route("/comment", methods=["POST"])
-def post_coffee_comment():
+@app.route("/api/comment/<coffee_id>", methods=["POST"])
+def post_coffee_comment(coffee_id):
+    coffee_id_receive = int(coffee_id)
     comment_receive = request.form['comment_give']
     id_receive = request.form['id_give']
+    nickname_receive = request.form['nickname_give']
 
-    # bucket_list = list(db.bucket.find({}, {'_id': False}))
-    # count = len(bucket_list) + 1
 
     doc = {
-        'id': id_receive,
+        'coffee_id': coffee_id_receive,
+        'user_id': id_receive,
+        'nickname': nickname_receive,
         'comment': comment_receive
     }
 
@@ -356,4 +357,4 @@ def post_coffee_comment():
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=4000, debug=True)

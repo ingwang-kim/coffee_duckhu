@@ -100,15 +100,21 @@
             /*background-color: aqua;*/
             padding: 20px;
         }
-
     </style>
 </head>
 
 <body>
 <input type="hidden" value="{{coffee_id}}" id="coffee_id">
+
+<input type="hidden" value="{{uid}}" id="uid">
+<input type="hidden" value="{{nickname}}" id="nickname">
+
+
 <!-- Navigation Start -->
 <!-- Header Start -->
+
 {% include "nav.html" %}
+
 <!-- 메인 컨테이너 -->
 <div class="main_container" id="main"></div>
 <div class="comment-textarea-container"><div>
@@ -144,6 +150,7 @@
 <script src="/static/theme/plugins/counto/counTo.js"></script>
 
 <!-- Main Script -->
+
 <script src="/static/js/coffeeDetail.js"></script>
 <script src="/static/js/logout.js"></script>
 
