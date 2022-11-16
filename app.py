@@ -43,8 +43,7 @@ def home():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.user.find_one({"id": payload['id']})
-        print(result)
-        return render_template('index.html', variable=result, nickname=user_info["nick"])
+        return render_template('index.html', variable=result, nickname=user_info["nick"], uid=user_info["uid"])
     except jwt.ExpiredSignatureError:
 
         return render_template('index.html', variable=result)
@@ -62,13 +61,15 @@ def register():
 
 @app.route('/mypage')
 def mypage():
-    return render_template('fav.html')
-    # try:
-    #     return render_template('fav.html')
-    # except jwt.ExpiredSignatureError:
-    #     return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    # except jwt.exceptions.DecodeError:
-    #     return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload['id']})
+        return render_template('fav.html', nickname=user_info["nick"], uid=user_info["uid"])
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/coffee')
 def detail():
@@ -117,7 +118,7 @@ def api_login():
         # exp에는 만료시간을 넣어줍니다. 만료시간이 지나면, 시크릿키로 토큰을 풀 때 만료되었다고 에러가 납니다.
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=120)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
