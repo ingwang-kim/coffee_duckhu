@@ -9,18 +9,18 @@
 
 (function ($) {
     'use strict';
-    
+
 AOS.init({
     once: true
 });
 
-    // ----------------------- 
+    // -----------------------
         // Progress Bar--------------------
-        // 
-        // 
+        //
+        //
 
-    $(window).on ('load', function (){ 
-          
+    $(window).on ('load', function (){
+
         $('.progress-bar').each(function(){
                 var width = $(this).data('percent');
                 $(this).css({'transition': 'width 3s'});
@@ -35,7 +35,7 @@ AOS.init({
                     });
                 });
             });
-        }); 
+        });
 
     $('.owl-carousel').owlCarousel({
         items:1,
