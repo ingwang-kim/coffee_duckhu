@@ -18,11 +18,12 @@ def home():
 
 @app.route("/coffees", methods=["GET"])
 def fave_get():
-    fav_list = [100,200,300,250,240,105]
 
-    # for i in fav_list:
-    #     a=(db.coffee.find({'coffee_id' : i},{'_id':False}))
-    #     print("print a " + str(a))
+
+    fav_list = [10,15,30,50,90,100,200,300,250,240,105]
+    # # for i in fav_list:
+    # #     a=(db.coffee.find({'coffee_id' : i},{'_id':False}))
+    # #     print("print a " + str(a))
     return_list = []
     for i in fav_list:
         for a in db.coffee.find({'coffee_id' : i},{'_id':False}):
@@ -35,9 +36,11 @@ def fave_get():
 @app.route("/delfav", methods=["post"])
 def web_mars_add():
     id_receive = request.form['id_give']
+    coffee_id_receive = request.form['coffee_name_give']
+    return_list_receive = request.form['return_list_give']
 
-    fav_list = db.users.delete_one({'name'id_receive})
-    return jsonify({'orders': fav_list})
+    fav_list = db.users.delete_one(return_list_receive)
+    return jsonify({'msg':'삭제완료' })
 
 
 

@@ -37,59 +37,31 @@
 </head>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
 <script>
-    let coffee_id
-    $(function () {
-        $.ajax({
-            type: 'GET',
-            url: '/coffees',
-            data: {},
-            success: function (response) {
-                console.log(response)
-                let rows = response['coffees']
-                for (let i = 0; i < rows.length; i++) {
-                    coffee_id = rows[i]['coffee_id']
-                    let cafe = rows[i]['cafe']
-                    let coffee_image = rows[i]['coffee_image']
-                    let coffee_name = rows[i]['coffee_name']
-                    let temp_menu =
-                        `<div class="col-lg-4 col-6 mb-4 shuffle-item"  data-groups="[&quot;design&quot;,&quot;illustration&quot;]">
-                            <div class="position-relative inner-box">
-                            <div class="image position-relative ">
-                            <img src="${coffee_image}" alt="portfolio-image" class="img-fluid w-100 d-block">
-                            <div class="overlay-box">
-                            <button onclick="del_fav()" class="close_btn" ></button>
-                            <div class="overlay-inner">
-                            <a class="overlay-content" href="portfolio-single.html">
-                            <h5 class="mb-0">${coffee_name}</h5>
-                            <p>${cafe}</p>
-                            </a>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>`
+    
 
-                    $('#menu_out').append(temp_menu)
+    function all_del() {
+        if( window.confirm('전체 삭제 하시겠습니까?')) {
+            console.log('coffee_id : '+coffee_id)
+            $.ajax({
+                type: 'POST',
+                url: '/delfav',
+                data: {
+                    // id_give: id,
+                    coffee_name_give: coffee_id,
+                },
 
+                success: function (response) {
+                    console.log(response)
+                    alert(response['msg'])
+                    window.location.reload()
                 }
-            }
-        })
-    })
-
-    function del_fav() {
-        $.ajax({
-            type: 'POST',
-            url: '/delfav',
-            data: {
-                id_give : id,
-                coffee_name_give : coffee_id
-            },
-            success: function (response) {
-                alert(response['msg'])
-                window.location.reload()
-            }
-        });
+            });
+        }
+        else {
+            console.log('취소')
+        }
 
     }
 
@@ -160,17 +132,24 @@
                         <input type="radio" name="shuffle-filter" value="all" checked="checked"/>전체 보기
                     </label>
                     <label class="btn">
-                        <input type="radio" name="shuffle-filter" value="design"/>카페별
+                        <input type="radio" name="shuffle-filter" value="design"/>스타벅스
                     </label>
                     <label class="btn">
-                        <input type="radio" name="shuffle-filter" value="branding"/>타입별
+                        <input type="radio" name="shuffle-filter" value="branding"/>할리스
+                    </label>
+                    <label class="btn">
+                        <input type="radio" name="shuffle-filter" value="branding"/>이디야
+                    </label>
+                    <label class="btn">
+                        <input type="radio" name="shuffle-filter" value="branding"/>빽다방
                     </label>
                 </div>
 
             </div>
             <!--			전체 삭제 버튼-->
             <div class="all_del">
-                <button type="button" name="shuffle-filter" class="btn-black"/>
+                <button type="button" name="shuffle-filter" class="btn-black" onclick="all_del()"/>
+
                 전체 삭제
             </div>
         </div>
@@ -185,7 +164,7 @@
         </div>
     </div>
 </section>
-
+<script src="static/theme/js/script.js" ></script>
 
 </body>
 </html>
