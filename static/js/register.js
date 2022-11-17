@@ -89,7 +89,7 @@ function nick_duple_check() {
             if (response['result'] == 'available') {
                 font_color_change(nick_msg_elem, "success");
                 nick_msg_elem.innerText = '사용 가능한 닉네임입니다.';
-                alert('사용 가능한 아이디입니다.');
+                alert('사용 가능한 닉네임입니다.');
                 nick_duple_flag = true;
             } else {
                 font_color_change(nick_msg_elem, "danger");

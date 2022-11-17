@@ -33,23 +33,28 @@ import hashlib
 @app.route('/')
 def home():
     result = []
-    for i in range(8):
-        j = randint(1, 342)
-        test = db.coffee.find_one({'coffee_id': j})
-        url = test['coffee_image']
+    favorite = []
+    best_list = list(db.coffee.find({}, {'coffee_id': 1, 'favorites': 1, 'coffee_image': 1}).sort('favorites', -1).limit(8))
+    for best in best_list:
+        url = best['coffee_image']
+        fav = best['favorites']
+        # j = randint(1, 342)
+        # test = db.coffee.find_one({'coffee_id': j})
+        # url = test['coffee_image']
         result.append(url)
+        favorite.append(fav)
 
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         print(payload)
         user_info = db.user.find_one({"id": payload['id']})
-        return render_template('index.html', variable=result, nickname=user_info["nick"], uid=user_info["uid"])
+        return render_template('index.html', variable=result, favorites=favorite, nickname=user_info["nick"], uid=user_info["uid"])
     except jwt.ExpiredSignatureError:
 
-        return render_template('index.html', variable=result)
+        return render_template('index.html', variable=result, favorites=favorite)
     except jwt.exceptions.DecodeError:
-        return render_template('index.html', variable=result)
+        return render_template('index.html', variable=result, favorites=favorite)
 
 @app.route('/login')
 def login():
@@ -219,6 +224,8 @@ def favorites_send():
         else:
             return jsonify({'msg': '이미 즐겨찾기 목록에 들어 있습니다.'})
     except jwt.exceptions.DecodeError:
+        return jsonify({'msg': '로그인을 해주세요.'})
+    except jwt.ExpiredSignatureError:
         return jsonify({'msg': '로그인을 해주세요.'})
 
 
