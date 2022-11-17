@@ -44,57 +44,70 @@
 <!-- Navigation Start -->
 <!-- Header Start -->
 {% include "nav.html" %}
-<input type="hidden" value="{{uid}}" id="uid">
+
+<input type="hidden" value="{{ uid }}" id="uid">
 <section class="portfolio ">
     <div class="container">
         <!--정렬 라벨-->
         <div class="row my-5">
             <div class="col-10">
                 <div class="btn-group btn-group-toggle " data-toggle="buttons">
-                    <label class="btn active ">
-                        <input type="radio" name="shuffle-filter" value="all" checked="checked" onclick="all_menu()"/>전체 보기
+                    <label class="btn active " onclick="all_menu()">
+                        <input type="radio" name="shuffle-filter" value="all" checked="checked"/>전체 보기
                     </label>
-                    <label class="btn">
-                        <input type="radio" name="shuffle-filter" value="design" onclick="star_menu()"/>스타벅스
+                    <label class="btn" onclick="star_menu()">
+                        <input type="radio" name="shuffle-filter" value="star"/>스타벅스
                     </label>
-                    <label class="btn">
-                        <input type="radio" name="shuffle-filter" value="branding" onclick="hollys_menu()"/>할리스
+                    <label class="btn" onclick="hollys_menu()">
+                        <input type="radio" name="shuffle-filter" value="design"/>할리스
                     </label>
-                    <label class="btn">
-                        <input type="radio" name="shuffle-filter" value="branding" onclick="ediya_menu()"/>이디야
+                    <label class="btn" onclick="ediya_menu()">
+                        <input type="radio" name="shuffle-filter" value="branding"/>이디야
                     </label>
-                    <label class="btn">
-                        <input type="radio" name="shuffle-filter" value="branding" onclick="paik_menu()"/>빽다방
+                    <label class="btn" onclick="paik_menu()">
+                        <input type="radio" name="shuffle-filter" value="illustration"/>빽다방
                     </label>
                 </div>
-
             </div>
-            <!--			전체 삭제 버튼-->
+        <!--			전체 삭제 버튼-->
             <div class="all_del">
                 <button type="button" name="shuffle-filter" class="btn btn-black" onclick="all_del()"/>
 
                 전체 삭제
             </div>
         </div>
-        <!--즐겨찾기 한 메뉴 출력-->
+    <!--즐겨찾기 한 메뉴 출력-->
         <div id="category">
-            <h4 name="shuffle-filter">전체 메뉴</h4>
+            <h4 name="shuffle-filter">메뉴</h4>
             <div class="row shuffle-wrapper portfolio-gallery" id="menu_out">
 
             </div>
         </div>
+
     </div>
 </section>
+
 <!-- Footer start -->
 {% include "footer.html" %}
 <!-- Footer End -->
 
 <!-- jQuery -->
 <script src="/static/theme/plugins/jQuery/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js" integrity="sha512-aUhL2xOCrpLEuGD5f6tgHbLYEXRpYZ8G5yD+WlFrXrPy2IrWBlu6bih5C9H6qGsgqnU6mgx6KtU8TreHpASprw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"
+        integrity="sha512-aUhL2xOCrpLEuGD5f6tgHbLYEXRpYZ8G5yD+WlFrXrPy2IrWBlu6bih5C9H6qGsgqnU6mgx6KtU8TreHpASprw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Bootstrap JS -->
+<script src="/static/theme/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="/static/theme/plugins/aos/aos.js"></script>
+<script src="/static/theme/plugins/owl-carousel/owl.carousel.min.js"></script>
+<script src="/static/theme/plugins/shuffle/shuffle.min.js"></script>
+<script src="/static/theme/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/static/theme/plugins/animated-text/animated-text.js"></script>
+<script src="/static/theme/plugins/counto/apear.js"></script>
+<script src="/static/theme/plugins/counto/counTo.js"></script>
 
 <!-- Main Script -->
-<script src="/static/js/fav.js" ></script>
+<script src="/static/js/fav.js"></script>
 <script src="/static/js/logout.js"></script>
 
 </body>
