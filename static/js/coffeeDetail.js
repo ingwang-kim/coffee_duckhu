@@ -25,14 +25,14 @@
 
                  let detail_ing = `
                                     <div style="display: flex">
-                                        <div style="position: relative;">
+                                        <div style="position: relative;" class="mr-5">
                                             <img className = "myimage" src =${coffee_image} alt =${coffee_name} style="height: 380px"/>
 <!--                                            <img className = "favorite-btn" -->
 <!--                                                    style="position: absolute; right: 0; height: 50px; margin-right: 10px" -->
 <!--                                                    src="https://cdn0.iconfinder.com/data/icons/shop_icons/256/star.png" -->
 <!--                                                    alt="Bookmark icon"/>                         -->
                                         </div>  
-                                        <div class="ingredient-container" id="ingredient">
+                                        <div class="ingredient-container ml-5" id="ingredient">
                                             <h2>${coffee_name}</h2>
                                             <div class="divider"></div>
                                             <div class="coffee-desc">
