@@ -27,7 +27,7 @@ function ediya() {
                             <div class="position-relative inner-box">
                             <div class="image position-relative ">
                             <h3><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</span></h3>
+                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >⭐ ${favorites}</span></h3>
                             <img src="${url}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
                             <div class="overlay-inner">
@@ -64,7 +64,7 @@ function starbucks() {
                             <div class="position-relative inner-box">
                             <div class="image position-relative ">
                             <h3><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</span></h3>
+                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >⭐ ${favorites}</span></h3>
                             <img src="${url}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
                             <div class="overlay-inner">
@@ -102,7 +102,7 @@ function hollys() {
                             <div class="position-relative inner-box">
                             <div class="image position-relative ">
                             <h3><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</span></h3>
+                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >⭐ ${favorites}</span></h3>
                             <img src="${url}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
                             <div class="overlay-inner">
@@ -139,7 +139,7 @@ function paikdabang() {
                             <div class="position-relative inner-box">
                             <div class="image position-relative ">
                             <h3><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >${favorites}</span></h3>
+                            style="margin-top: 9px; opacity: 1; z-index: 1; transform: scale(1.1);" >⭐ ${favorites}</span></h3>
                             <img src="${url}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
                             <div class="overlay-inner">
@@ -183,7 +183,8 @@ function send_id(item) {
 }
 
 var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 2,
+        // slidesPerView: 2,
+        slidesPerView: 3,
         spaceBetween: 30,
         pagination: {
           el: ".swiper-pagination",

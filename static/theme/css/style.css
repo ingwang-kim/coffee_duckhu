@@ -775,8 +775,10 @@ textarea.form-control {
 }
 /* style추가 */
 .swiper {
-  width: 600px;
-  height: 321px;
+  /*width: 600px;*/
+  /*height: 321px;*/
+  width: 1110px;
+  height: 450px;
 }
 
 .swiper-slide {
@@ -801,7 +803,8 @@ textarea.form-control {
 .swiper-slide img {
   background: white;
   display: block;
-  width: 600px;
+  /*width: 600px;*/
+  width: 300px;
   height: 321px;
   object-fit: cover;
 }
