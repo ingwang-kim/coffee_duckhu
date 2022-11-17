@@ -19,16 +19,16 @@ function all_menu(){
                 let coffee_image = rows[i]['coffee_image']
                 let coffee_name = rows[i]['coffee_name']
                 let temp_menu =
-                    `<div class="col-lg-4 col-6 mb-4 shuffle-item"  data-groups="[&quot;design&quot;,&quot;illustration&quot;]">
+                    `       <div class="col-lg-4 col-6 mb-4 shuffle-item"  data-groups="[&quot;design&quot;,&quot;illustration&quot;]">
                             <div class="position-relative inner-box">
                             <div class="image position-relative ">
                             <img src="${coffee_image}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
-                            <button onclick="del_fav(${coffee_id})" class="close_btn" ></button>
+                            <button onclick="del_fav(${coffee_id})" class="close_btn" style="cursor: pointer" ></button>
                             <div class="overlay-inner">
                             <a class="overlay-content" href="/coffee/${coffee_id}">
                             <h5 class="mb-0">${coffee_name}</h5>
-                            <p>${cafe}</p>
+                            <p>상세페이지 이동</p>
                             </a>
                             </div>
                             </div>
@@ -67,11 +67,11 @@ function star_menu() {
                             <div class="image position-relative ">
                             <img src="${coffee_image}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
-                            <button onclick="del_fav(${coffee_id})" class="close_btn" ></button>
+                            <button onclick="del_fav(${coffee_id})" class="close_btn" style="cursor: pointer"></button>
                             <div class="overlay-inner">
                             <a class="overlay-content" href="/coffee/${coffee_id}">
                             <h5 class="mb-0">${coffee_name}</h5>
-                            <p>${cafe}</p>
+                            <p>상세페이지 이동</p>
                             </a>
                             </div>
                             </div>
@@ -112,11 +112,11 @@ function paik_menu() {
                             <div class="image position-relative ">
                             <img src="${coffee_image}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
-                            <button onclick="del_fav(${coffee_id})" class="close_btn" ></button>
+                            <button onclick="del_fav(${coffee_id})" class="close_btn" style="cursor: pointer" ></button>
                             <div class="overlay-inner">
                             <a class="overlay-content" href="/coffee/${coffee_id}">
                             <h5 class="mb-0">${coffee_name}</h5>
-                            <p>${cafe}</p>
+                            <p>상세페이지 이동</p>
                             </a>
                             </div>
                             </div>
@@ -154,11 +154,11 @@ function ediya_menu() {
                             <div class="image position-relative ">
                             <img src="${coffee_image}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
-                            <button onclick="del_fav(${coffee_id})" class="close_btn" ></button>
+                            <button onclick="del_fav(${coffee_id})" class="close_btn"  style="cursor: pointer"></button>
                             <div class="overlay-inner">
                             <a class="overlay-content" href="/coffee/${coffee_id}">
                             <h5 class="mb-0">${coffee_name}</h5>
-                            <p>${cafe}</p>
+                            <p>상세페이지 이동</p>
                             </a>
                             </div>
                             </div>
@@ -197,11 +197,11 @@ function hollys_menu() {
                             <div class="image position-relative ">
                             <img src="${coffee_image}" alt="portfolio-image" class="img-fluid w-100 d-block">
                             <div class="overlay-box">
-                            <button onclick="del_fav(${coffee_id})" class="close_btn" ></button>
+                            <button onclick="del_fav(${coffee_id})" class="close_btn" style="cursor: pointer" ></button>
                             <div class="overlay-inner">
                             <a class="overlay-content" href="/coffee/${coffee_id}">
                             <h5 class="mb-0">${coffee_name}</h5>
-                            <p>${cafe}</p>
+                            <p>상세페이지 이동</p>
                             </a>
                             </div>
                             </div>
